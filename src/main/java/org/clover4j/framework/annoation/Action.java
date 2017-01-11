@@ -6,17 +6,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Action方法直接
+ * Controller#Action方法注解
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Action {
 
     /**
-     * 请求类型路径
+     * 请求的类型和路径
+     * 样式如(get:/xxxx)
      * @return
      */
     String value();

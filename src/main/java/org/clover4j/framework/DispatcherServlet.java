@@ -31,7 +31,7 @@ import java.util.Map;
  * @since 1.0.0
  */
 
-@WebServlet(urlPatterns = "/", loadOnStartup = 0)
+@WebServlet(urlPatterns = "/*", loadOnStartup = 0)//这里urlPatterns如果是/将会出现问题
 public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
 
     @Override

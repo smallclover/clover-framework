@@ -16,12 +16,12 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * 类操作工具
+ * 类加载
  * @author smallclover
  * @create 2017-01-03
  * @since 1.0.0
  */
-public class ClassUtil {
+public class ClassUtil {//文件加载是难点
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtil.class);
 
@@ -34,7 +34,7 @@ public class ClassUtil {
     }
 
     /**
-     * 加再累
+     * 加载类
      * @param className
      * @param isInitialized
      * @return
@@ -44,7 +44,7 @@ public class ClassUtil {
         Class<?> cls;
 
         try {
-            cls = Class.forName(className,isInitialized,getClassLoader());
+            cls = Class.forName(className, isInitialized, getClassLoader());
         } catch (ClassNotFoundException e) {
             LOGGER.error("load class failure", e);
 
@@ -68,7 +68,7 @@ public class ClassUtil {
      */
     public static Set<Class<?>> getClassSet(String packageName){
 
-        Set<Class<?>> classSet = new HashSet<Class<?>>();
+        Set<Class<?>> classSet = new HashSet<>();
 
         try {
             Enumeration<URL> urls = getClassLoader().getResources(packageName.replace(".", "/"));

@@ -1,6 +1,7 @@
 package org.clover4j.framework.util;
 
 /**
+ * 强制类型转换
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0

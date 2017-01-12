@@ -43,7 +43,7 @@ public final class ReflectionUtil {
      */
     public static Object invokeMethod(Object obj, Method method, Object...args){
         Object result;
-        method.setAccessible(true);
+        method.setAccessible(true);//取消语言访问检查 能提高反射速度？
         try {
             result = method.invoke(obj, args);
         } catch (Exception e) {

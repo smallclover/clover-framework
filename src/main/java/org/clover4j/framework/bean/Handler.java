@@ -11,12 +11,12 @@ import java.lang.reflect.Method;
 public class Handler {
 
     /**
-     * Controller
+     * Controller标注的控制器类
      */
     private Class<?> controllerClass;
 
     /**
-     * Action 方法
+     * Controller#Action 方法
      */
     private Method actionMethod;
 

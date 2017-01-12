@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 服务类注解
+ * 服务类注解组件
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0

@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * 依赖注入助手
+ * 依赖注入
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0

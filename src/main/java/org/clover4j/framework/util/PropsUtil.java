@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * 属性文件工具类
+ * 加载属性文件，读取属性文件包含的值
  *
  * @author smallclover
  * @create 2017-01-03

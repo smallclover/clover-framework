@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * Bean管理
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0
@@ -27,7 +28,7 @@ public final class BeanHelper {
     }
 
     /**
-     * 获取Bean映射
+     * 获取所有Bean映射
      * @return
      */
     public static Map<Class<?>, Object> getBeanMap(){

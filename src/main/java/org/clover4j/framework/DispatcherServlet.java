@@ -74,6 +74,7 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
                 paramMap.put(paramName, paramValue);
             }
 
+            //处理post请求
             String body = CodecUtil.decodeURL(StreamUtil.getString(req.getInputStream()));
             if (StringUtil.isNotEmpty(body)){
                 String[] params = StringUtil.splitString(body, "&");

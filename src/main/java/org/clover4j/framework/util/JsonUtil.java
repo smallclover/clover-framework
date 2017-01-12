@@ -55,4 +55,6 @@ public final class JsonUtil {
 
         return pojo;
     }
+
+    //泛型方法
 }

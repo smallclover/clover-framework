@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 控制器注解
+ * 控制器注解组件，包含多个Action
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0

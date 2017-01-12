@@ -11,7 +11,7 @@ import java.net.URLEncoder;
 
 
 /**
- * 编码解码操作工具
+ * 编码、解码、MD5加密
  * @author smallclover
  * @create 2017-01-08
  * @since 1.0.0

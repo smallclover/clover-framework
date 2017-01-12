@@ -8,10 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ *
  * @author smallclover
  * @create 2017-01-04
+ * @since 1.0.0
  */
 public final class ClassHelper {
+    //1.代码略微重复 2.getClassSet和getBeanClassSet意义不明
 
     private static final Set<Class<?>> CLASS_SET;
 

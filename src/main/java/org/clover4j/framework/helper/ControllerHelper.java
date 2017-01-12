@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 控制器助手类
+ * Controller注解的控制器管理
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0
@@ -40,6 +40,10 @@ public final class ControllerHelper {
                             String mapping = action.value();
 
                             if (mapping.matches("\\w+:/\\w*")){//正则表达式
+
+                                // \w匹配字母或数字或下划线或汉字
+                                // + 重复一次或更多次
+                                // * 重复零次或更多次
                                 String[] array = mapping.split(":");
 
                                 if (ArrayUtil.isNotEmpty(array) && array.length == 2) {

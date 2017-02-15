@@ -4,6 +4,7 @@ import org.clover4j.framework.annoation.Controller;
 import org.clover4j.framework.annoation.Service;
 import org.clover4j.framework.util.ClassUtil;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -76,5 +77,38 @@ public final class ClassHelper {
         beanClassSet.addAll(getControllerClassSet());
 
         return beanClassSet;
+    }
+
+    /**
+     * 获得应用包下某父类（或接口）的所有子类（或实现类）
+     * @return
+     * @since 2.0.0
+     */
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass){
+        Set<Class<?>> classSet = new HashSet<>();
+        for (Class<?> cls : CLASS_SET){
+            if (superClass.isAssignableFrom(cls) && superClass.equals(cls)){
+                classSet.add(cls);
+            }
+        }
+
+        return classSet;
+    }
+
+    /**
+     * 获取某应用包下带有某注解的所有类
+     * @param annotationClass
+     * @return
+     * @since 2.0.0
+     */
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass){
+        Set<Class<?>> classSet = new HashSet<>();
+        for (Class<?> cls : CLASS_SET){
+            if (cls.isAnnotationPresent(annotationClass)){
+                classSet.add(cls);
+            }
+        }
+
+        return classSet;
     }
 }

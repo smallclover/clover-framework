@@ -4,7 +4,7 @@
 
   <groupId>org.clover4j</groupId>
   <artifactId>clover-framework</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>2.1.0-2017215.beta</version>
   <packaging>jar</packaging>
 
   <name>clover-framework</name>
@@ -98,6 +98,14 @@
       <artifactId>commons-codec</artifactId>
       <version>1.10</version>
     </dependency>
+
+    <!-- cglib -->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>2.2.2</version>
+    </dependency>
+
 
   </dependencies>
 </project>

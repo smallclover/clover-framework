@@ -17,5 +17,5 @@ public interface ConfigConstant {
     String APP_BASE_PACKAGE = "clover.framework.app.base_package";
     String APP_JSP_PATH = "clover.framework.app.jsp_path";
     String APP_ASSET_PATH = "clover.framework.app.asset_path";
-    String APP_UPLOAD_LIMIT = "clover.frameworl.app.upload_limit";
+    String APP_UPLOAD_LIMIT = "clover.framework.app.upload_limit";
 }

@@ -1,10 +1,7 @@
 package org.clover4j.framework;
 
 import org.clover4j.framework.annoation.Controller;
-import org.clover4j.framework.helper.BeanHelper;
-import org.clover4j.framework.helper.ClassHelper;
-import org.clover4j.framework.helper.ControllerHelper;
-import org.clover4j.framework.helper.IocHelper;
+import org.clover4j.framework.helper.*;
 import org.clover4j.framework.util.ClassUtil;
 
 /**
@@ -20,8 +17,9 @@ public final class HelperLoader {
         Class<?>[] classList = {
                 ClassHelper.class,
                 BeanHelper.class,
+                AopHelper.class, /**@since 2.0.0 注意需要在IocHelper之前加载**/
                 IocHelper.class,
-                ControllerHelper.class,
+                ControllerHelper.class
         };
 
         for (Class<?> cls : classList) {

@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * 切面注解
  * @author smallclover
  * @create 2017-01-16
- * @since 1.0.0
+ * @since 2.0.0
  */
 
 @Target(ElementType.METHOD)

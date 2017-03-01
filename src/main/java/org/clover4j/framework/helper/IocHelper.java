@@ -41,7 +41,7 @@ public class IocHelper {
                             Class<?> beanFieldClass = beanField.getType();
                             Object beanFieldInstance = beanMap.get(beanFieldClass);
                             if (beanFieldInstance != null){
-                                //通过反射
+                                //通过反射来设置Field的实例
                                 ReflectionUtil.setField(beanInstance, beanField, beanFieldInstance);
                             }
                         }

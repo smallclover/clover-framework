@@ -36,7 +36,7 @@ public final class ClassHelper {
     }
 
     /**
-     * 获取应用包下所有Service类
+     * 获取应用包下所有包含@Service注解的服务层类
      * @return
      */
     public static Set<Class<?>> getServiceClassSet(){
@@ -52,7 +52,7 @@ public final class ClassHelper {
     }
 
     /**
-     * 获取应用包下所有Controller类
+     * 获取应用包下所有包含@Controller注解的控制层类
      * @return
      */
     public static Set<Class<?>> getControllerClassSet(){
@@ -87,6 +87,7 @@ public final class ClassHelper {
     public static Set<Class<?>> getClassSetBySuper(Class<?> superClass){
         Set<Class<?>> classSet = new HashSet<>();
         for (Class<?> cls : CLASS_SET){
+            //Class.isAssignableFrom()是用来判断一个类Class1和另一个类Class2是否相同或是另一个类的子类或接口。
             if (superClass.isAssignableFrom(cls) && superClass.equals(cls)){
                 classSet.add(cls);
             }

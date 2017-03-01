@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 请求转发器
+ * 请求转发器，框架核心控制器
+ * 基于servlet3.0
  * @author smallclover
  * @create 2017-01-08
  * @since 1.0.0
@@ -37,7 +38,7 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
 
-        //初始化相关对象
+        //初始化框架核心类
         HelperLoader.init();
         //获取ServletContext对象(用于注册Servlet)
         ServletContext servletContext = servletConfig.getServletContext();
@@ -95,6 +96,7 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
             Method actionMethod = handler.getActionMethod();
             Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
             //处理Action方法的返回值
+            //返回View类型
             if (result instanceof View){
                 //返回JSP页面
                 View view = (View) result;
@@ -109,23 +111,22 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
                         }
                         req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
                     }
-
-                }else if (result instanceof Data){
-                    //返回JSON
-                    Data data = (Data) result;
-                    Object model = data.getModel();
-                    if (model != null){
-                        resp.setContentType("application/json");
-                        resp.setCharacterEncoding("UTF-8");
-                        PrintWriter writer = resp.getWriter();
-                        String json = JsonUtil.toJson(model);
-                        writer.write(json);
-                        writer.flush();
-                        writer.close();
-                    }
+            //返回JSON类型
+            }else if (result instanceof Data){
+                Data data = (Data) result;
+                Object model = data.getModel();
+                if (model != null){
+                    resp.setContentType("application/json");
+                    resp.setCharacterEncoding("UTF-8");
+                    PrintWriter writer = resp.getWriter();
+                    String json = JsonUtil.toJson(model);
+                    writer.write(json);
+                    writer.flush();
+                    writer.close();
                 }
             }
         }
+    }
 
     }
 }

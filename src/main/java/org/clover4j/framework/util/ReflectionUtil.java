@@ -18,7 +18,7 @@ public final class ReflectionUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtil.class);
 
     /**
-     * 创建实例
+     * 创建类例
      * @param cls
      * @return
      */
@@ -35,7 +35,7 @@ public final class ReflectionUtil {
     }
 
     /**
-     * 调用方法
+     * 调用方法指定的方法
      * @param obj
      * @param method
      * @param args
@@ -55,7 +55,7 @@ public final class ReflectionUtil {
     }
 
     /**
-     * 设置成员变量的值
+     * 设置类成员变量的值
      * @param obj
      * @param field
      * @param value

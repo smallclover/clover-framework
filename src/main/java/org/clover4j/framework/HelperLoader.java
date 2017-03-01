@@ -1,6 +1,5 @@
 package org.clover4j.framework;
 
-import org.clover4j.framework.annoation.Controller;
 import org.clover4j.framework.helper.*;
 import org.clover4j.framework.util.ClassUtil;
 
@@ -12,6 +11,9 @@ import org.clover4j.framework.util.ClassUtil;
  */
 public final class HelperLoader {
 
+    /**
+     * 初始化所有核心类
+     */
     public static void init(){
 
         Class<?>[] classList = {
@@ -26,4 +28,5 @@ public final class HelperLoader {
             ClassUtil.loadClass(cls.getName());
         }
     }
+
 }

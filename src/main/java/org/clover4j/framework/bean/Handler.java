@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 public class Handler {
 
     /**
-     * Controller标注的控制器类
+     * @Controller注解标注的控制器类
      */
     private Class<?> controllerClass;
 

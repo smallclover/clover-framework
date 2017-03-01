@@ -12,13 +12,15 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Controller注解的控制器管理
+ * 管理@Controller注解的控制器
+ *
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0
  */
 public final class ControllerHelper {
 
+    //存放Request和Handler之间的映射关系
     public static final Map<Request, Handler> ACTION_MAP = new HashMap<>();
 
     static {
@@ -39,6 +41,7 @@ public final class ControllerHelper {
                             Action action = method.getAnnotation(Action.class);
                             String mapping = action.value();
 
+                            //验证URL映射规则
                             if (mapping.matches("\\w+:/\\w*")){//正则表达式
 
                                 // \w匹配字母或数字或下划线或汉字
@@ -47,7 +50,7 @@ public final class ControllerHelper {
                                 String[] array = mapping.split(":");
 
                                 if (ArrayUtil.isNotEmpty(array) && array.length == 2) {
-                                    //获取方法与请求路径
+                                    //获取请求方法与请求路径
                                     String requestMethod = array[0];
                                     String requestPath = array[1];
                                     Request request = new Request(requestMethod, requestPath);

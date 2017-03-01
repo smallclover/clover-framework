@@ -6,7 +6,7 @@ import org.clover4j.framework.util.PropsUtil;
 import java.util.Properties;
 
 /**
- * 用于获取配置文件的属性值
+ * 获取配置文件的属性值
  * @author smallclover
  * @create 2017-01-03
  * @since 1.0.0

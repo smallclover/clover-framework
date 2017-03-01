@@ -13,7 +13,7 @@ public class StringUtil {
     /**
      * 字符串分隔符
      */
-    public static final String SEPARATOR = String.valueOf((char)29);
+    public static final String SEPARATOR = String.valueOf((char)29);//? 分组符
 
 
     /**
@@ -47,4 +47,5 @@ public class StringUtil {
     public static String[] splitString(String str, String separator){
         return StringUtils.splitByWholeSeparator(str, separator);
     }
+
 }

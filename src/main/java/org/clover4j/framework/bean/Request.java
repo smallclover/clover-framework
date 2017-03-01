@@ -35,7 +35,10 @@ public class Request {
     }
 
 
-    //？
+    /**
+     * 判断一个对象是否相等，务必重写equals和hashCode，（根据hash值来取的时候似乎用到了hashCode）
+     * @return
+     */
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this);

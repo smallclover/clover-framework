@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 视图对象,处理返回值为视图的情况
+ * 视图对象,返回值为视图
  * @author smallclover
  * @create 2017-01-08
  * @since 1.0.0

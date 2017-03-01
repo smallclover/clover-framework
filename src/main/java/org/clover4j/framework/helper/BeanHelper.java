@@ -28,7 +28,7 @@ public final class BeanHelper {
     }
 
     /**
-     * 获取所有Bean映射
+     * 获取所有Bean类与Bean实例的映射
      * @return
      */
     public static Map<Class<?>, Object> getBeanMap(){

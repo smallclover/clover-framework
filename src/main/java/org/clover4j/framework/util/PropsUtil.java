@@ -1,6 +1,5 @@
 package org.clover4j.framework.util;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +19,11 @@ public class PropsUtil {//部分代码重复
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
 
+    /**
+     * 加载配置文件
+     * @param fileName
+     * @return
+     */
     public static Properties loadProps(String fileName){
 
         Properties props =  null;

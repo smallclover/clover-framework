@@ -3,6 +3,7 @@ package org.clover4j.framework.util;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
+ * 数组工具
  * @author smallclover
  * @create 2017-01-04
  * @since 1.0.0

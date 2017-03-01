@@ -1,7 +1,7 @@
 package org.clover4j.framework.bean;
 
 /**
- * 数据对象 处理返回值为JSON的情况
+ * 数据对象 返回值为JSON
  * @author smallclover
  * @create 2017-01-08
  * @since 1.0.0

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: cglib:cglib:2.2.2">
+    <CLASSES>
+      <root url="jar://D:/Java/maven/repository/cglib/cglib/2.2.2/cglib-2.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/Java/maven/repository/cglib/cglib/2.2.2/cglib-2.2.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/Java/maven/repository/cglib/cglib/2.2.2/cglib-2.2.2-sources.jar!/" />
+      <root url="jar://D:/Java/maven/repository/cglib/cglib/2.2.2/cglib-2.2.2-sources.jar!/src/proxy" />
+      <root url="jar://D:/Java/maven/repository/cglib/cglib/2.2.2/cglib-2.2.2-sources.jar!/src/test" />
+    </SOURCES>
+  </library>
+</component>

@@ -9,7 +9,7 @@ package org.clover4j.framework.proxy;
 public interface Proxy {
 
     /**
-     * 执行链式代理
+     * 执行链式代理,执行的顺序按照添加到链上的先后顺序
      * @param proxyChain
      * @return
      * @throws Throwable

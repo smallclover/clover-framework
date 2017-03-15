@@ -4,7 +4,7 @@
 
   <groupId>org.clover4j</groupId>
   <artifactId>clover-framework</artifactId>
-  <version>2.1.0-2017215.beta</version>
+  <version>2.1.1-20170315.GA</version>
   <packaging>jar</packaging>
 
   <name>clover-framework</name>

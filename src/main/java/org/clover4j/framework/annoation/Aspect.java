@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * @since 2.0.0
  */
 
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Aspect {
 

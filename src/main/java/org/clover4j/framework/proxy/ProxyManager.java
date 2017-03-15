@@ -17,8 +17,8 @@ public class ProxyManager {
 
     /**
      * CGLib Enhance#create
-     * @param targetClass
-     * @param proxyList
+     * @param targetClass 需要被代理的目标类
+     * @param proxyList 代理集合
      * @param <T>
      * @return
      */

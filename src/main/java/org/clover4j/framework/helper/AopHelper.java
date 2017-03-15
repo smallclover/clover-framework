@@ -58,24 +58,6 @@ public final class AopHelper {
     }
 
     /**
-     * @since 2.0.0
-    private static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception{
-        Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
-        Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
-
-        for (Class<?> proxyClass : proxyClassSet){
-            if (proxyClass.isAnnotationPresent(Aspect.class)){
-                Aspect aspect = proxyClass.getAnnotation(Aspect.class);
-                Set<Class<?>> targetClassSet = createTargetClassSet(aspect);
-                proxyMap.put(proxyClass, proxyClassSet);
-            }
-        }
-
-        return proxyMap;
-    }
-    **/
-
-    /**
      * 目标类与代理对象之间的映射关系
      * @param proxyMap
      * @return
@@ -126,7 +108,7 @@ public final class AopHelper {
             if (proxyClass.isAnnotationPresent(Aspect.class)){
                 Aspect aspect = proxyClass.getAnnotation(Aspect.class);
                 Set<Class<?>> targetClassSet = createTargetClassSet(aspect);
-                proxyMap.put(proxyClass, proxyClassSet);
+                proxyMap.put(proxyClass, targetClassSet);
             }
         }
 

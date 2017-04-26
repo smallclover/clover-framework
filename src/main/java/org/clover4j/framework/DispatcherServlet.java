@@ -53,9 +53,13 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //注意：没有设置请求编码，是否会出现乱码的问题。
+
         //获取请求方法和请求路径
         String requestMethod = req.getMethod().toLowerCase();
         String requestPath = req.getPathInfo();
+        //String requestPath_test = req.getServletPath();//根据拦截的路径不同与getPathInfo方法是不同的。
+        //getServletPath-"/*"    getPathInfo-"*.jsp"
 
         //获取Action处理器
         Handler handler = ControllerHelper.getHandler(requestMethod, requestPath);
@@ -68,9 +72,13 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
 
             //创建请求参数对象
             Map<String, Object> paramMap = new HashMap<>();
-            Enumeration<String> paramNames = req.getParameterNames();
+            Enumeration<String> paramNames = req.getParameterNames();//获取页面中所有元素的名称
+
+            //注意：这里没有考虑一个复选框，即一个名字包含多个值，此时需要使用数组来接受。*notice：bug
             while (paramNames.hasMoreElements()){
                 String paramName = paramNames.nextElement();
+                //需要考虑三种情况：1.值为null；2.只有一个值；3.有多个值
+                //String[] paramValues = req.getParameterValues(paramName);
                 String paramValue = req.getParameter(paramName);
                 paramMap.put(paramName, paramValue);
             }
@@ -94,7 +102,12 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
             Param param = new Param(paramMap);
             //调用Action方法
             Method actionMethod = handler.getActionMethod();
-            Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            Object result = null;//是否会出现空指针异常？
+            if (param.isEmpty()){
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+            }else {
+                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+            }
             //处理Action方法的返回值
             //返回View类型
             if (result instanceof View){
@@ -110,6 +123,7 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
                             req.setAttribute(entry.getKey(), entry.getValue());
                         }
                         req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
+                        //是否有需要支持重定向即sendRedirect
                     }
             //返回JSON类型
             }else if (result instanceof Data){

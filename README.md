@@ -19,4 +19,4 @@
 + **Aspect** 注解，用于进行增强，该注解需要一个参数如：@Aspect(Controller.class)表示，增强所有的用@Controller标注的类，该注解和AspectProxy一起使用。
 
 ## *注意事项*
-1. @Action注解的函数需要带有参数**Param**
+1. ~~@Action注解的函数需要带有参数**Param**~~

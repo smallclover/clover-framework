@@ -15,6 +15,12 @@ public abstract class AspectProxy implements Proxy{
 
     private static final Logger logger = LoggerFactory.getLogger(AspectProxy.class);
 
+    /**
+     * 切面的相关逻辑
+     * @param proxyChain
+     * @return
+     * @throws Throwable
+     */
     @Override
     public final Object doProxy(ProxyChain proxyChain) throws Throwable {
         Object result = null;
@@ -47,18 +53,48 @@ public abstract class AspectProxy implements Proxy{
         return true;
     }
 
+    /**
+     * 在目标方法调用前执行
+     * @param cls
+     * @param method
+     * @param params
+     * @throws Throwable
+     */
     public void before(Class<?> cls, Method method, Object[] params) throws Throwable{
 
     }
 
+    /**
+     * 在目标方法调用后执行
+     * @param cls
+     * @param method
+     * @param params
+     * @param result
+     * @throws Throwable
+     */
     public void after(Class<?> cls, Method method, Object[] params, Object result) throws Throwable{
     }
 
+    /**
+     * 在抛出异常时执行
+     * @param cls
+     * @param method
+     * @param params
+     * @param e
+     * @throws Throwable
+     */
     public void error(Class<?> cls, Method method, Object[] params, Throwable e) throws Throwable{
     }
+
+    /**
+     * 在进入方法时执行
+     */
     public void begin() {
     }
 
+    /**
+     * 在退出方法时执行
+     */
     public void end(){
 
     }

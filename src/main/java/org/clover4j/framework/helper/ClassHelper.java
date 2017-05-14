@@ -68,7 +68,7 @@ public final class ClassHelper {
     }
 
     /**
-     * 获取应用包下所有Bean类
+     * 获取应用包下所有Bean类，即标有@Service和@Controller的类
      * @return
      */
     public static Set<Class<?>> getBeanClassSet(){

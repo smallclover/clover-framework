@@ -7,7 +7,7 @@ package org.clover4j.framework;
  * @since 1.0.0
  */
 public interface ConfigConstant {
-    //配置文件的名字和属性都已经固定，是否可以改进
+    //problem：配置文件的名字和属性都已经固定，可以改进
     String CONFIG_FILE = "clover.properties";
 
     String JDBC_DRIVER = "clover.framework.jdbc.driver";

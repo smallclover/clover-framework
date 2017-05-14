@@ -79,10 +79,15 @@ public class ClassUtil {//文件加载是难点
                     //加载file类型的文件
                     if (protocol.equals("file")){
                         //包名对应的路径名
+                        //中文环境下java在获取文件的时候空格会变成20%
                         String packagePath = url.getPath().replaceAll("%20", " ");
                         addClass(classSet, packagePath, packageName);
                     //加载jar类型的文件
-                    }else if (protocol.equals("jar")){
+                    //problem：如果应用的包名和框架包名一致是否会导致重复加载？
+                    //bug：如果应用名和框架包名一致会尝试着加载但部分不会成功。（这里不应该被加载）
+                    //}else if (protocol.equals("jar")) {
+                    //该处屏蔽了类库org.clover4j暂时没有出现问题
+                    }else if (protocol.equals("jar") && !packageName.equals("org.clover4j")){
                         JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
                         if (jarURLConnection != null){
                             JarFile jarFile = jarURLConnection.getJarFile();
@@ -149,7 +154,7 @@ public class ClassUtil {//文件加载是难点
             }else {
                 String subPackagePath = filename;
                 if (StringUtil.isNotEmpty(packagePath)){
-                    subPackagePath = packagePath + "/" + subPackagePath;
+                    subPackagePath = packagePath + "/" + subPackagePath;//这里应该 多了一个斜线
                 }
                 String subPackageName = filename;
                 if (StringUtil.isNotEmpty(packageName)){

@@ -15,7 +15,7 @@ import java.util.Map;
  * @since 1.0.0
  */
 public class IocHelper {
-
+    //bug：暂时无法实现为父类注入子类的实例
     static {
 
         //获取所有的Bean类与Bean实例之间的映射关系（简称Bean Map）

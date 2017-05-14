@@ -50,7 +50,8 @@ public class TransactionProxy implements Proxy {
                 LOGGER.debug("rollback transaction");
                 throw e;
             } finally {
-                FLAG_HOLDER.remove();
+                //防止事务逻辑执行多次
+                FLAG_HOLDER.remove();//防止内存泄漏
             }
         }else {
             result = proxyChain.doProxyChain();

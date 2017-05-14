@@ -113,34 +113,57 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
             if (result instanceof View){
                 //返回JSP页面
                 View view = (View) result;
-                String path = view.getPath();
-                if (StringUtil.isNotEmpty(path)){
-                    if (path.startsWith("/")){
-                        resp.sendRedirect(req.getContextPath() + path);
-                    }else {
-                        Map<String, Object> model = view.getModel();
-                        for (Map.Entry<String, Object> entry : model.entrySet()){
-                            req.setAttribute(entry.getKey(), entry.getValue());
-                        }
-                        req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
-                        //是否有需要支持重定向即sendRedirect
-                    }
-            //返回JSON类型
+                handlerViewResult(view, req, resp);
             }else if (result instanceof Data){
+                //返回JSON类型
                 Data data = (Data) result;
-                Object model = data.getModel();
-                if (model != null){
-                    resp.setContentType("application/json");
-                    resp.setCharacterEncoding("UTF-8");
-                    PrintWriter writer = resp.getWriter();
-                    String json = JsonUtil.toJson(model);
-                    writer.write(json);
-                    writer.flush();
-                    writer.close();
-                }
+                handlerDataResult(data, resp);
             }
         }
     }
 
+    /**
+     *转发返回jsp页面的请求
+     * @param view
+     * @param req
+     * @param resp
+     * @throws IOException
+     * @throws ServletException
+     * @since 2.1.2
+     */
+    private void handlerViewResult(View view, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String path = view.getPath();
+        if (StringUtil.isNotEmpty(path)) {
+            if (path.startsWith("/")) {
+                resp.sendRedirect(req.getContextPath() + path);
+            } else {
+                Map<String, Object> model = view.getModel();
+                for (Map.Entry<String, Object> entry : model.entrySet()) {
+                    req.setAttribute(entry.getKey(), entry.getValue());
+                }
+                req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
+                //是否有需要支持重定向即sendRedirect
+            }
+        }
+    }
+
+    /**
+     * 转发返回json数据请求
+     * @param data
+     * @param resp
+     * @throws IOException
+     * @since 2.1.2
+     */
+    private void handlerDataResult(Data data, HttpServletResponse resp) throws IOException {
+        Object model = data.getModel();
+        if (model != null){
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            PrintWriter writer = resp.getWriter();
+            String json = JsonUtil.toJson(model);
+            writer.write(json);
+            writer.flush();
+            writer.close();
+        }
     }
 }

@@ -7,6 +7,7 @@ import org.clover4j.framework.bean.View;
 import org.clover4j.framework.helper.BeanHelper;
 import org.clover4j.framework.helper.ConfigHelper;
 import org.clover4j.framework.helper.ControllerHelper;
+import org.clover4j.framework.helper.ServletHelper;
 import org.clover4j.framework.util.*;
 
 import javax.servlet.ServletConfig;
@@ -55,70 +56,76 @@ public class DispatcherServlet extends HttpServlet{//这里可以做一些改进
 
         //注意：没有设置请求编码，是否会出现乱码的问题。
 
-        //获取请求方法和请求路径
-        String requestMethod = req.getMethod().toLowerCase();
-        String requestPath = req.getPathInfo();
-        //String requestPath_test = req.getServletPath();//根据拦截的路径不同与getPathInfo方法是不同的。
-        //getServletPath-"/*"    getPathInfo-"*.jsp"
+        //初始化请求
+        ServletHelper.init(req, resp);
+        try {
+            //获取请求方法和请求路径
+            String requestMethod = req.getMethod().toLowerCase();
+            String requestPath = req.getPathInfo();
+            //String requestPath_test = req.getServletPath();//根据拦截的路径不同与getPathInfo方法是不同的。
+            //getServletPath-"/*"    getPathInfo-"*.jsp"
 
-        //获取Action处理器
-        Handler handler = ControllerHelper.getHandler(requestMethod, requestPath);
+            //获取Action处理器
+            Handler handler = ControllerHelper.getHandler(requestMethod, requestPath);
 
-        if (handler != null){
+            if (handler != null){
 
-            //获取Controller类及其Bean实例
-            Class<?> controllerClass = handler.getControllerClass();
-            Object controllerBean = BeanHelper.getBean(controllerClass);
+                //获取Controller类及其Bean实例
+                Class<?> controllerClass = handler.getControllerClass();
+                Object controllerBean = BeanHelper.getBean(controllerClass);
 
-            //创建请求参数对象
-            Map<String, Object> paramMap = new HashMap<>();
-            Enumeration<String> paramNames = req.getParameterNames();//获取页面中所有元素的名称
+                //创建请求参数对象
+                Map<String, Object> paramMap = new HashMap<>();
+                Enumeration<String> paramNames = req.getParameterNames();//获取页面中所有元素的名称
 
-            //注意：这里没有考虑一个复选框，即一个名字包含多个值，此时需要使用数组来接受。*notice：bug
-            while (paramNames.hasMoreElements()){
-                String paramName = paramNames.nextElement();
-                //需要考虑三种情况：1.值为null；2.只有一个值；3.有多个值
-                //String[] paramValues = req.getParameterValues(paramName);
-                String paramValue = req.getParameter(paramName);
-                paramMap.put(paramName, paramValue);
-            }
+                //注意：这里没有考虑一个复选框，即一个名字包含多个值，此时需要使用数组来接受。*notice：bug
+                while (paramNames.hasMoreElements()){
+                    String paramName = paramNames.nextElement();
+                    //需要考虑三种情况：1.值为null；2.只有一个值；3.有多个值
+                    //String[] paramValues = req.getParameterValues(paramName);
+                    String paramValue = req.getParameter(paramName);
+                    paramMap.put(paramName, paramValue);
+                }
 
-            //处理post请求
-            String body = CodecUtil.decodeURL(StreamUtil.getString(req.getInputStream()));
-            if (StringUtil.isNotEmpty(body)){
-                String[] params = StringUtil.splitString(body, "&");
-                if (ArrayUtil.isNotEmpty(params)){
-                    for (String param : params){
-                        String[] array = StringUtil.splitString(param, "=");
-                        if (ArrayUtil.isNotEmpty(array) && array.length == 2){
-                            String paramName = array[0];
-                            String paramValue = array[1];
-                            paramMap.put(paramName, paramValue);
+                //处理post请求
+                String body = CodecUtil.decodeURL(StreamUtil.getString(req.getInputStream()));
+                if (StringUtil.isNotEmpty(body)){
+                    String[] params = StringUtil.splitString(body, "&");
+                    if (ArrayUtil.isNotEmpty(params)){
+                        for (String param : params){
+                            String[] array = StringUtil.splitString(param, "=");
+                            if (ArrayUtil.isNotEmpty(array) && array.length == 2){
+                                String paramName = array[0];
+                                String paramValue = array[1];
+                                paramMap.put(paramName, paramValue);
+                            }
                         }
                     }
                 }
-            }
 
-            Param param = new Param(paramMap);
-            //调用Action方法
-            Method actionMethod = handler.getActionMethod();
-            Object result = null;//是否会出现空指针异常？
-            if (param.isEmpty()){
-                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
-            }else {
-                result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+                Param param = new Param(paramMap);
+                //调用Action方法
+                Method actionMethod = handler.getActionMethod();
+                Object result = null;//是否会出现空指针异常？
+                if (param.isEmpty()){
+                    result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+                }else {
+                    result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+                }
+                //处理Action方法的返回值
+                //返回View类型
+                if (result instanceof View){
+                    //返回JSP页面
+                    View view = (View) result;
+                    handlerViewResult(view, req, resp);
+                }else if (result instanceof Data){
+                    //返回JSON类型
+                    Data data = (Data) result;
+                    handlerDataResult(data, resp);
+                }
             }
-            //处理Action方法的返回值
-            //返回View类型
-            if (result instanceof View){
-                //返回JSP页面
-                View view = (View) result;
-                handlerViewResult(view, req, resp);
-            }else if (result instanceof Data){
-                //返回JSON类型
-                Data data = (Data) result;
-                handlerDataResult(data, resp);
-            }
+        } finally {
+            ServletHelper.destory();
         }
     }
 

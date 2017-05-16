@@ -1,6 +1,6 @@
 # clover-framework
 一个简单的MVC框架
-目前2.1.1版本项目代码参考开源中国@黄勇的Smart框架
+目前2.1.3版本项目代码参考开源中国@黄勇的Smart框架
 
 ## *Project Environment*
     OS: Window 10
